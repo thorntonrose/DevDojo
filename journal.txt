@@ -1,0 +1,14 @@
+usage: journal <options>
+options:
+--add <description>  add event
+--delete <id>        delete event
+--list               list events
+--find <text>        find events containing <text>
+
+-----
+
+* use JDBC (no Groovy SQL)
+* DB server at a985e95d2e1a311e7b77f128abb5186a-1218294245.us-east-1.elb.amazonaws.com, if needed
+* table name = journal on local DB, <user>_journal on shared DB
+* bonus for --help option
+* double bonus for unit tests

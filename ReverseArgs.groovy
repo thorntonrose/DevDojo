@@ -1,0 +1,1 @@
+args*.reverse().each { println it }

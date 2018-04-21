@@ -1,0 +1,6 @@
+#!/bin/bash
+running=$(ps -ef | grep $1 | grep -v grep | grep -v "status $1")
+if [ "$running" == "" ]; then echo "stopped"; else echo "running"; fi
+
+# OR
+#ps -ef | grep -v grep | grep -v $$ | grep $1 >/dev/null && echo 'running' || echo 'stopped'

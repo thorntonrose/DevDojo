@@ -1,0 +1,17 @@
+{
+  "name": "ttr-chuck",
+  "version": "1.0.0",
+  "description": "ttr-chuck",
+  "bin": {
+    "chuck": "cli.js"
+  },
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thornton Rose",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}

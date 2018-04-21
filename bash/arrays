@@ -1,0 +1,10 @@
+#!/bin/bash
+
+arr[1]=1
+arr[2]=2
+
+echo "len: ${#arr[@]}"
+
+for i in {1..2}; do
+   echo "$i: ${arr[$i]}"
+done

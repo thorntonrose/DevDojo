@@ -1,0 +1,19 @@
+#!/bin/bash
+
+case $1 in
+   start)
+	   [ "$2" == "-f" ] && opts="--rm" || opts="-d --name postgres"
+	   docker run -p 5432:5432 $opts postgres
+	   ;;
+
+   stop)
+	   docker rm -f postgres
+	   ;;
+
+	status)
+	   docker ps | grep postgres >/dev/null && echo "running" || echo "stopped"
+	   ;;
+
+	*)
+	   echo "usage: $0 {start [-f]|stop|status}"
+esac

@@ -24,21 +24,11 @@ func encode(char rune, distance int) rune {
 	return char
 }
 
-func encodeText(text string) string {
+func encodeText(text string, distance int) string {
 	cipher := make([]rune, len(text))
 
 	for index, char := range text {
-		cipher[index] = encode(char, 3)
-	}
-
-	return string(cipher)
-}
-
-func decodeText(text string) string {
-	cipher := make([]rune, len(text))
-
-	for index, char := range text {
-		cipher[index] = encode(char, -3)
+		cipher[index] = encode(char, distance)
 	}
 
 	return string(cipher)
@@ -54,9 +44,9 @@ func main() {
 
 	text := flag.Arg(0)
 
-	if (*decodeFlag) {
-		fmt.Println(decodeText(text))
+	if *decodeFlag {
+		fmt.Println(encodeText(text, -3))
 	} else {
-		fmt.Println(encodeText(text))
+		fmt.Println(encodeText(text, 3))
 	}
 }

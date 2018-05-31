@@ -18,7 +18,7 @@ func main() {
 	cipher := make([]rune, len(text))
 	distance := 3
 
-	if (*decodeFlag) {
+	if *decodeFlag {
 		distance = -3
 	}
 
@@ -26,7 +26,7 @@ func main() {
 		if unicode.IsLetter(char) {
 			base := 'a'
 
-			if (distance < 0) {
+			if distance < 0 {
 				base = 'z'
 			}
 

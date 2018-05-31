@@ -1,0 +1,11 @@
+build/
+.gradle/
+.nb-gradle/
+*.log
+.idea
+*.iml
+.classpath
+.project
+.settings
+bin/
+.history/

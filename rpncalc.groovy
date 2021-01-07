@@ -33,5 +33,5 @@ def multiply() {
 }
 
 def divide() {
-	stack.push((1/stack.pop()) * stack.pop())
+	stack.push((1 / stack.pop()) * stack.pop())
 }

@@ -7,7 +7,7 @@ def flatten(Map src, Map dest, String prefix = "") {
 		}
 	}
 
-	return dest
+	dest
 }
 
 println flatten([a: 1], [:])

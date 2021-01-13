@@ -4,16 +4,18 @@ if (args.length < 1) {
 }
 
 stack = []
+operations = ["+": { add() }, "-": { subtract() }, "*": { multiply() }, "/": { divide() }]
 
-operations = [
-	"+": { stack.pop() + stack.pop() },
-	"-": { (- stack.pop()) + stack.pop() },
-	"*": { stack.pop() * stack.pop() },
-	"/": { (1 / stack.pop()) * stack.pop() }
-].withDefault {
-	if (!it.isNumber()) { throw new Exception("unknown operator: $it") }
-	return { key as float }
+add = { stack.pop() + stack.pop() }
+subtract = { (- stack.pop()) + stack.pop() }
+multiply = { stack.pop() * stack.pop() }
+divide = { (1 / stack.pop()) * stack.pop() }
+
+calculate = {
+	if (it.isNumber()) { return it as float }
+	if (!operations[it]) { throw new Exception("unknown operator: $it") }
+	operations[it]()
 }
 
-args[0].split(" ").each { stack.push operations[it]() }
+args[0].split(" ").each { stack.push calculate(it) }
 println stack.pop()

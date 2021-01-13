@@ -1,11 +1,11 @@
 cli = new CliBuilder(usage: "wc [options] <file>")
 cli.l "count lines"
 cli.m "count characters"
-cli.w "count word"
+cli.w "count words"
 cli.h "help"
 
 opts = cli.parse(args)
-if (! opts) { return }
+if (!opts) { return }
 
 if (opts.arguments().size() < 1) {
    cli.usage()
@@ -26,8 +26,10 @@ opts.arguments().each { fileName ->
 
    println "${fileTotals.join(' ')} $fileName"
 
-   if (totals.size() == 0) { fileTotals.size().times { totals << 0 } /* or: totals = [0]*fileTotals.size() */ }
+   if (totals.size() == 0) { totals = [0]*fileTotals.size() }
    fileTotals.eachWithIndex { num, index -> totals[index] += num }
 }
 
-if (opts.arguments().size() > 1) { println "${totals.join(' ')} total" }
+if (opts.arguments().size() > 1) {
+	println "${totals.join(' ')} total"
+}

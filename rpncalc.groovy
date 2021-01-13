@@ -12,7 +12,7 @@ args[0].split(" ").each { token ->
 	} else {
 		def operation = operations[token]
 		if (!operation) { throw new Exception("unknown operator: $token") }
-		operation()
+		stack.push operation()
 	}
 }
 
@@ -21,17 +21,17 @@ println stack.pop()
 //-----------------------------------------------------------------------------
 
 def add() {
-	stack.push stack.pop() + stack.pop()
+	stack.pop() + stack.pop()
 }
 
 def subtract() {
-	stack.push((- stack.pop()) + stack.pop())
+	(- stack.pop()) + stack.pop()
 }
 
 def multiply() {
-	stack.push stack.pop() * stack.pop()
+	stack.pop() * stack.pop()
 }
 
 def divide() {
-	stack.push((1/stack.pop()) * stack.pop())
+	(1 / stack.pop()) * stack.pop()
 }

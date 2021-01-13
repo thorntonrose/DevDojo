@@ -1,0 +1,19 @@
+if (args.length < 1) {
+	println "usage: rpncalc <expression>"
+	return
+}
+
+stack = []
+
+operations = [
+	"+": { stack.pop() + stack.pop() },
+	"-": { (- stack.pop()) + stack.pop() },
+	"*": { stack.pop() * stack.pop() },
+	"/": { (1 / stack.pop()) * stack.pop() }
+].withDefault {
+	if (!it.isNumber()) { throw new Exception("unknown operator: $it") }
+	return { key as float }
+}
+
+args[0].split(" ").each { stack.push operations[it]() }
+println stack.pop()

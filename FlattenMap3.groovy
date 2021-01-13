@@ -1,10 +1,10 @@
 def flatten(Map src, Map dest=[:], String parentKey="") {
-	src.each { key, val -> flatten(val, dest, [parentKey, key].findAll().join(".")) }
+	src.each { key, val -> dest += flatten(val, dest, [parentKey, key].findAll().join(".")) }
 	dest
 }
 
 def flatten(val, Map dest, String key) {
-	dest[key] = val
+	dest + [(key): val]
 }
 
 println flatten([a: 1])

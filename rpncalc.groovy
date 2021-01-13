@@ -4,34 +4,17 @@ if (args.length < 1) {
 }
 
 stack = []
-operations = [ "+": { add() }, "-": { subtract() }, "*": { multiply() }, "/": { divide() } ]
+operations = ["+": { add() }, "-": { subtract() }, "*": { multiply() }, "/": { divide() }]
 
-args[0].split(" ").each { token ->
-	if (token.isNumber()) {
-		stack.push token as float
-	} else {
-		def operation = operations[token]
-		if (!operation) { throw new Exception("unknown operator: $token") }
-		stack.push operation()
-	}
+add = { stack.pop() + stack.pop() }
+subtract = { (- stack.pop()) + stack.pop() }
+multiply = { stack.pop() * stack.pop() }
+divide = { (1 / stack.pop()) * stack.pop() }
+
+calculate = {
+	if (!operations[it]) { throw new Exception("unknown operator: $it") }
+	operations[it]()
 }
 
+args[0].split(" ").each { stack.push it.isNumber() ? it as float : calculate(it) }
 println stack.pop()
-
-//-----------------------------------------------------------------------------
-
-def add() {
-	stack.pop() + stack.pop()
-}
-
-def subtract() {
-	(- stack.pop()) + stack.pop()
-}
-
-def multiply() {
-	stack.pop() * stack.pop()
-}
-
-def divide() {
-	(1 / stack.pop()) * stack.pop()
-}

@@ -2,26 +2,28 @@
 def flatten(Map src) {
 	def dest = [:]
 	def stack = []
-	def ctx = [src: src, keys: src.keySet() as List, index: 0, flatKey: ""]
+	def keys = src.keySet() as List
+	def index = 0
+	def parentKey = ""
 
 	while (true) {
-		while (ctx.index < ctx.keys.size()) {
-			def key = ctx.keys[ctx.index]
-			def value = ctx.src[key]
-			def flatKey = [ctx.flatKey, key].findAll().join(".")
+		while (index < keys.size()) {
+			def key = keys[index]
+			def value = src[key]
+			def flatKey = [parentKey, key].findAll().join(".")
 
 			if (value instanceof Map) {
-				stack.push ctx
-				ctx = [src: value, keys: value.keySet() as List, index: 0, flatKey: flatKey]
+				stack.push([src, keys, index, flatKey])
+				(src, keys, index, parentKey) = [value, value.keySet() as List, 0, flatKey]
 			} else {
 				dest[flatKey] = value
-				ctx.index ++
+				index ++
 			}
 		}
 
 		if (!stack) { break }
-		ctx = stack.pop()
-		ctx.index ++
+		(src, keys, index, parentKey) = stack.pop()
+		index ++
 	}
 
 	dest

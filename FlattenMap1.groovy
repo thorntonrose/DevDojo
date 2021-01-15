@@ -1,8 +1,9 @@
-def flatten(Map src, Map dest=[:], String parentKey="") {
+def flatten(Map src, String parentKey="") {
+	def dest = [:]
+
 	src.each { key, val ->
 		key = [parentKey, key].findAll().join(".")
-		// if (val instanceof Map) { flatten(val, dest, key) } else { dest[key] = val }
-		val instanceof Map ? flatten(val, dest, key) : (dest[key] = val)
+		dest += val instanceof Map ? flatten(val, key) : [(key): val]
 	}
 
 	dest
